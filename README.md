@@ -1,2 +1,6 @@
 # itextinactionbook-chinese
 iText in Action Chinese Translation.
+
+刚开始翻译这本书...
+
+updating...
