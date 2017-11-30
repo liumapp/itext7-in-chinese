@@ -1,0 +1,1 @@
+ready to translate : [https://developers.itextpdf.com/content/itext-7-jump-start-tutorial/chapter-5-manipulating-existing-pdf-document](https://developers.itextpdf.com/content/itext-7-jump-start-tutorial/chapter-5-manipulating-existing-pdf-document)

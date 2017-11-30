@@ -1,0 +1,1 @@
+ready to translate : [https://developers.itextpdf.com/content/itext-7-jump-start-tutorial/chapter-7-creating-pdfua-and-pdfa-documents](https://developers.itextpdf.com/content/itext-7-jump-start-tutorial/chapter-7-creating-pdfua-and-pdfa-documents)
