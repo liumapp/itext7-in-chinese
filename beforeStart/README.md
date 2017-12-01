@@ -86,5 +86,5 @@ ready to translate : [https://developers.itextpdf.com/content/itext-7-jump-start
     <version>2.0.4</version>
 </dependency>
 ```
-iText中的一些功能是封闭的源代码。例如，如果你想使用PdfCalligraph，你需要排版模块。没有官方许可证密钥，此模块将无法使用。
+iText中的一些功能是封闭的源代码。例如，如果你想使用**PdfCalligraph**，你需要排版模块。没有官方许可证密钥，此模块将无法使用。
 
