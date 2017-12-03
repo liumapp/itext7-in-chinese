@@ -192,7 +192,7 @@ canvas.endText();
 如果我们假设这个例子，并且改变它以产生如图2.4所示的PDF，那又该怎么办呢？
 ![](https://developers.itextpdf.com/sites/default/files/C02F04.png "图2.4：在绝对位置添加倾斜的和彩色的文本")
 
-<p align="center">**图2.4：在绝对位置添加倾斜的和彩色的文本**</p>
+<p align="center">图2.4：在绝对位置添加倾斜的和彩色的文本</p>
 
 更改背景的颜色是StarWarsCrawl示例中的简单部分：
 ```
