@@ -1,4 +1,4 @@
-ready to translate:[https://developers.itextpdf.com/content/itext-7-jump-start-tutorial/chapter-4-making-pdf-interactive](https://developers.itextpdf.com/content/itext-7-jump-start-tutorial/chapter-4-making-pdf-interactive)
+﻿ready to translate:[https://developers.itextpdf.com/content/itext-7-jump-start-tutorial/chapter-4-making-pdf-interactive](https://developers.itextpdf.com/content/itext-7-jump-start-tutorial/chapter-4-making-pdf-interactive)
 ## PDF交互
 >标签：[Java](https://developers.itextpdf.com/tags/java)
 [annotations](https://developers.itextpdf.com/tags/annotations)
