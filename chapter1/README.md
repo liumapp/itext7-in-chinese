@@ -17,22 +17,25 @@ ready to translate : [https://developers.itextpdf.com/content/itext-7-jump-start
 以下就是iText7的一个Hello World例子：
 
 ```
-	PdfWriter writer = new PdfWriter(dest);
-	PdfDocument pdf = new PdfDocument(writer);
-	Document document = new Document(pdf);
-	document.add(new Paragraph("Hello World!"));
-	document.close();
+PdfWriter writer = new PdfWriter(dest);
+PdfDocument pdf = new PdfDocument(writer);
+Document document = new Document(pdf);
+document.add(new Paragraph("Hello World!"));
+document.close();
 ```
 
 接下来我们一行一行分析这个例子：
 
-1. 
+1. 首先我们实例化了一个PdfWriter的对象writer。writer这个对象可以编写PDF文件，但它不一定很清楚它所创建PDF文档的内容是什么。当文件的结构被确定的时候，writer将编写不同的文件部分和不同的对象，来构成一个合法的文档文件。在这种情况下，我们通过传递一个包含了文件路径，名为dest的字符串参数，例如：results/chapter01/hello_world.pdf。构造函数也会接受一个输出流OutPutStream作为参数。例如：如果我们想写一个web应用程序，我们可以创建一个ServletOutPutStream，如果我们想在内存中创建一个PDF文档，我们可以使用一个ByteArrayOutputStream等等。
 
-We create a PdfWriter instance. PdfWriter is an object that can write a PDF file. It doesn't know much about the actual content of the PDF document it is writing. The PdfWriter doesn't know what the document is about, it just writes different file parts and different objects that make up a valid document once the file structure is completed. In this case, we pass a String parameter, named dest, that contains a path to a file, for instance results/chapter01/hello_world.pdf. The constructor also accepts an OutputStream as parameter. For instance: if we wanted to write a web application, we could have created a ServletOutputStream; if we wanted to create a PDF document in memory, we could have used a ByteArrayOutputStream; and so on.
+2. 一个PdfWriter通过监听PdfDocument来获取应该编写的内容。PdfDocument将会管理那些被添加的，分配在不同页面中的内容，并且去关联跟这些内容相关的信息。在第七章中，我们将会发现一个PdfWriter可以监听一系列不同的PdfDocument类。
 
+3. 一旦我们创建了一个PdfWriter和一个PdfDocument，我们就完成了所有具有PDF特征的低层次代码。在第三行代码中，我们创建了一个以PdfDocument为参数的文档对象，有了它之后，我们就可以不用去管创建PDF什么的了。
 
-The PdfWriter knows what to write because it listens to a PdfDocument. The PdfDocument manages the content that is added, distributes that content over different pages, and keeps track of whatever information is relevant for that content. In chapter 7, we'll discover that there are various flavors of PdfDocument classes a PdfWriter can listen to.
-Once we've created a PdfWriter and a PdfDocument, we're done with all the low-level, PDF-specific code. We create a Document that takes the PdfDocument as parameter. Now that we have the document object, we can forget that we're creating PDF.
-We create a Paragraph containing the text "Hello World" and we add that paragraph to the document object.
-We close the document. Our PDF has been created.
+4. 第四行代码中，我们创建了一个包含“Hello World”这段文本信息的Paragraph对象，并且将这个对象添加到了文档对象中。
 
+5. 第五行代码我们关闭了文档对象，然后我们的PDF就已经创建好了。
+
+图1.1展示了最终的结果：
+![Figure 1.1: Hello World example](https://developers.itextpdf.com/sites/default/files/C01F01.png)
+<center>图1.1: Hello World案例</center>
