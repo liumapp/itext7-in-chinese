@@ -14,7 +14,7 @@
 ![](https://developers.itextpdf.com/sites/default/files/C04F01.png "图4.1：文本注释
 ")
 
-<p align="center">**图4.1：文本注释释**</p>
+<p align="center">图4.1：文本注释释</p>
 
 TextAnnotation示例的大部分代码与Hello World示例相同。唯一的区别是我们创建并添加一个注释：
 ```

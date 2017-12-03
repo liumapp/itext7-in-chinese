@@ -20,7 +20,7 @@ canvas.moveTo(-406, 0)
 
 ![](https://developers.itextpdf.com/sites/default/files/C02F01.png "图2.1：绘制X和Y轴")
 
-<p align="center">**图2.1：绘制X和Y轴**</p>
+<p align="center">图2.1：绘制X和Y轴</p>
 
 显示X和Y轴的PDF是使用Axes示例创建的。让我们一步一步检查这个例子。
 ```
@@ -96,14 +96,16 @@ canvas.stroke();
 ```
 现在让我们通过改变线条宽度，引入短划线模式，以及应用不同的笔触颜色来修改本章的第一个例子，从而得到如图2.2所示的PDF。
 ![](https://developers.itextpdf.com/sites/default/files/C02F02.png "图2.2：绘制一个网格")
-<p align="center">**图2.2：绘制一个网格**</p>
+<p align="center">图2.2：绘制一个网格</p>
 在GridLines示例中，我们首先定义一系列Color对象：
+
 ```
 Color grayColor = new DeviceCmyk(0.f, 0.f, 0.f, 0.875f);
 Color greenColor = new DeviceCmyk(1.f, 0.f, 1.f, 0.176f);
 Color blueColor = new DeviceCmyk(1.f, 0.156f, 0.f, 0.118f);
 ```
 PDF规范（ISO-32000）定义了许多不同的颜色空间，每个颜色空间都在iText的一个单独的类中实现。最常用的颜色空间是DeviceGray（由单个强度参数定义的颜色），DeviceRgb（由三个参数：红色，绿色和蓝色定义）和DeviceCmyk（由四个参数：青色，品红色，黄色和黑色定义）。在我们的例子中，我们使用三种CMYK颜色。
+
 ```
 请注意，我们没有使用java.awt.Color类。我们正在使用iText的Color类，它可以在com.itextpdf.kernel.color包中找到。
 ```
@@ -144,7 +146,7 @@ canvas.setLineWidth(2).setStrokeColor(greenColor)
 在图2.3中，我们看到了“星球大战：帝国反击战”第五集的开头部分。
 ![](https://developers.itextpdf.com/sites/default/files/C02F03.png "图2.3：在绝对位置添加文本")
 
-<p align="center">**图2.3：在绝对位置添加文本**</p>
+<p align="center">图2.3：在绝对位置添加文本</p>
 
 创建这种PDF的最好方法是使用具有不同对齐的段落对象序列-标题中心; 左对齐正文文本），并将这些段落添加到一个Document对象。使用高级方法将文本分布在多行，如果内容不符合页面宽度，则自动引入换行符;如果剩余内容不符合页面高度，则使用分页符。
 
@@ -190,7 +192,7 @@ canvas.endText();
 如果我们假设这个例子，并且改变它以产生如图2.4所示的PDF，那又该怎么办呢？
 ![](https://developers.itextpdf.com/sites/default/files/C02F04.png "图2.4：在绝对位置添加倾斜的和彩色的文本")
 
-<p align="center">**图2.4：在绝对位置添加倾斜的和彩色的文本**</p>
+<p align="center">图2.4：在绝对位置添加倾斜的和彩色的文本</p>
 
 更改背景的颜色是StarWarsCrawl示例中的简单部分：
 ```
