@@ -38,4 +38,5 @@ document.close();
 
 图1.1展示了最终的结果：
 ![Figure 1.1: Hello World example](https://developers.itextpdf.com/sites/default/files/C01F01.png)
-<center>图1.1: Hello World案例</center>
+
+<p align="center">图1.1: Hello World案例</p>
