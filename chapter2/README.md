@@ -20,7 +20,7 @@ canvas.moveTo(-406, 0)
 
 ![](https://developers.itextpdf.com/sites/default/files/C02F01.png "图2.1：绘制X和Y轴")
 
-<p align="center">**图2.1：绘制X和Y轴**</p>
+<p align="center">图2.1：绘制X和Y轴</p>
 
 显示X和Y轴的PDF是使用Axes示例创建的。让我们一步一步检查这个例子。
 ```
@@ -96,7 +96,7 @@ canvas.stroke();
 ```
 现在让我们通过改变线条宽度，引入短划线模式，以及应用不同的笔触颜色来修改本章的第一个例子，从而得到如图2.2所示的PDF。
 ![](https://developers.itextpdf.com/sites/default/files/C02F02.png "图2.2：绘制一个网格")
-<p align="center">**图2.2：绘制一个网格**</p>
+<p align="center">图2.2：绘制一个网格</p>
 在GridLines示例中，我们首先定义一系列Color对象：
 ```
 Color grayColor = new DeviceCmyk(0.f, 0.f, 0.f, 0.875f);
@@ -144,7 +144,7 @@ canvas.setLineWidth(2).setStrokeColor(greenColor)
 在图2.3中，我们看到了“星球大战：帝国反击战”第五集的开头部分。
 ![](https://developers.itextpdf.com/sites/default/files/C02F03.png "图2.3：在绝对位置添加文本")
 
-<p align="center">**图2.3：在绝对位置添加文本**</p>
+<p align="center">图2.3：在绝对位置添加文本</p>
 
 创建这种PDF的最好方法是使用具有不同对齐的段落对象序列-标题中心; 左对齐正文文本），并将这些段落添加到一个Document对象。使用高级方法将文本分布在多行，如果内容不符合页面宽度，则自动引入换行符;如果剩余内容不符合页面高度，则使用分页符。
 
