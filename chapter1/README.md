@@ -37,6 +37,46 @@ document.close();
 5. 第五行代码我们关闭了文档对象，然后我们的PDF就已经创建好了。
 
 图1.1展示了最终的结果：
-![Figure 1.1: Hello World example](https://developers.itextpdf.com/sites/default/files/C01F01.png)
 
+![Figure 1.1: Hello World example](https://developers.itextpdf.com/sites/default/files/C01F01.png)
 <p align="center">图1.1: Hello World案例</p>
+
+接下来让我们添加一些复杂的内容，比如改改字体，组织一些列表之类的文本，参考图1.2。
+
+![Figure 1.2: List example](https://developers.itextpdf.com/sites/default/files/C01F02.png)
+<p align="center">图1.2: List案例</p>
+
+这个例子[RickaStley](https://developers.itextpdf.com/content/itext-7-jump-start-tutorial/examples/chapter-1#1724-c01e02_rickastley.java)写明了是如何做到的：
+
+```
+PdfWriter writer = new PdfWriter(dest);
+PdfDocument pdf = new PdfDocument(writer);
+Document document = new Document(pdf);
+// Create a PdfFont
+PdfFont font = PdfFontFactory.createFont(FontConstants.TIMES_ROMAN);
+// Add a Paragraph
+document.add(new Paragraph("iText is:").setFont(font));
+// Create a List
+List list = new List()
+    .setSymbolIndent(12)
+    .setListSymbol("\u2022")
+    .setFont(font);
+// Add ListItem objects
+list.add(new ListItem("Never gonna give you up"))
+    .add(new ListItem("Never gonna let you down"))
+    .add(new ListItem("Never gonna run around and desert you"))
+    .add(new ListItem("Never gonna make you cry"))
+    .add(new ListItem("Never gonna say goodbye"))
+    .add(new ListItem("Never gonna tell a lie and hurt you"));
+// Add the list
+document.add(list);
+document.close();
+```
+
+1到第3行，以及第22行的代码跟Hello World的示例是相同的，但现在我们已经不是仅仅添加一个段落了。iText通常会使用Helvetica作为默认的文本字体。如果你想换一个字体的话，那么你需要先创建一个PdfFont的实例。你可以通过PdfFontFactory这个类来获得字体（第5行）。我们使用这个字体对象来改变一个段落（第7行）和一个列表（第9行）的字体。这是一个无序列表（第11行），列表项的列表缩进用了12个用户单位（第10行）。然后我们添加了6个列对象（第14－19行）到文档列表中。
+
+这难道不是一件很有意思的事情吗？接下来，让我们介绍一些图片。图1.3介绍了如何添加一张狐狸和一张狗的图像到一个段落中。
+
+![图1.3:Image案例](https://developers.itextpdf.com/sites/default/files/C01F03_0.png)
+<p align="center">图1.3:Image案例</p>
+
