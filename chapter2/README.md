@@ -98,12 +98,14 @@ canvas.stroke();
 ![](https://developers.itextpdf.com/sites/default/files/C02F02.png "图2.2：绘制一个网格")
 <p align="center">图2.2：绘制一个网格</p>
 在GridLines示例中，我们首先定义一系列Color对象：
+
 ```
 Color grayColor = new DeviceCmyk(0.f, 0.f, 0.f, 0.875f);
 Color greenColor = new DeviceCmyk(1.f, 0.f, 1.f, 0.176f);
 Color blueColor = new DeviceCmyk(1.f, 0.156f, 0.f, 0.118f);
 ```
 PDF规范（ISO-32000）定义了许多不同的颜色空间，每个颜色空间都在iText的一个单独的类中实现。最常用的颜色空间是DeviceGray（由单个强度参数定义的颜色），DeviceRgb（由三个参数：红色，绿色和蓝色定义）和DeviceCmyk（由四个参数：青色，品红色，黄色和黑色定义）。在我们的例子中，我们使用三种CMYK颜色。
+
 ```
 请注意，我们没有使用java.awt.Color类。我们正在使用iText的Color类，它可以在com.itextpdf.kernel.color包中找到。
 ```
