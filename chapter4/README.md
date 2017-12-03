@@ -15,3 +15,14 @@ ready to translate:[https://developers.itextpdf.com/content/itext-7-jump-start-t
 ")
 
 **图4.1：文本注释释**
+
+TextAnnotation示例的大部分代码与Hello World示例相同。唯一的区别是我们创建并添加一个注释：
+```
+PdfAnnotation ann = new PdfTextAnnotation(new Rectangle(20, 800, 0, 0))
+    .setColor(Color.GREEN)
+    .setTitle(new PdfString("iText"))
+    .setContents("With iText, "
+        + "you can truly take your documentation needs to the next level.")
+    .setOpen(true);
+pdf.getFirstPage().addAnnotation(ann);
+```
