@@ -17,34 +17,15 @@ ready to translate : [https://developers.itextpdf.com/content/itext-7-jump-start
 以下就是iText7的一个Hello World例子：
 
 ```
-<<<<<<< HEAD
-	PdfWriter writer = new PdfWriter(dest);
-	PdfDocument pdf = new PdfDocument(writer);
-	Document document = new Document(pdf);
-	document.add(new Paragraph("Hello World!"));
-	document.close();
-=======
 PdfWriter writer = new PdfWriter(dest);
 PdfDocument pdf = new PdfDocument(writer);
 Document document = new Document(pdf);
 document.add(new Paragraph("Hello World!"));
 document.close();
->>>>>>> fd3575065a1959e47f96e3814a06e543d8de78a8
 ```
 
 接下来我们一行一行分析这个例子：
 
-<<<<<<< HEAD
-1. 
-
-We create a PdfWriter instance. PdfWriter is an object that can write a PDF file. It doesn't know much about the actual content of the PDF document it is writing. The PdfWriter doesn't know what the document is about, it just writes different file parts and different objects that make up a valid document once the file structure is completed. In this case, we pass a String parameter, named dest, that contains a path to a file, for instance results/chapter01/hello_world.pdf. The constructor also accepts an OutputStream as parameter. For instance: if we wanted to write a web application, we could have created a ServletOutputStream; if we wanted to create a PDF document in memory, we could have used a ByteArrayOutputStream; and so on.
-
-
-The PdfWriter knows what to write because it listens to a PdfDocument. The PdfDocument manages the content that is added, distributes that content over different pages, and keeps track of whatever information is relevant for that content. In chapter 7, we'll discover that there are various flavors of PdfDocument classes a PdfWriter can listen to.
-Once we've created a PdfWriter and a PdfDocument, we're done with all the low-level, PDF-specific code. We create a Document that takes the PdfDocument as parameter. Now that we have the document object, we can forget that we're creating PDF.
-We create a Paragraph containing the text "Hello World" and we add that paragraph to the document object.
-We close the document. Our PDF has been created.
-=======
 1. 首先我们实例化了一个PdfWriter的对象writer。writer这个对象可以编写PDF文件，但它不一定很清楚它所创建PDF文档的内容是什么。当文件的结构被确定的时候，writer将编写不同的文件部分和不同的对象，来构成一个合法的文档文件。在这种情况下，我们通过传递一个包含了文件路径，名为dest的字符串参数，例如：results/chapter01/hello_world.pdf。构造函数也会接受一个输出流OutPutStream作为参数。例如：如果我们想写一个web应用程序，我们可以创建一个ServletOutPutStream，如果我们想在内存中创建一个PDF文档，我们可以使用一个ByteArrayOutputStream等等。
 
 2. 一个PdfWriter通过监听PdfDocument来获取应该编写的内容。PdfDocument将会管理那些被添加的，分配在不同页面中的内容，并且去关联跟这些内容相关的信息。在第七章中，我们将会发现一个PdfWriter可以监听一系列不同的PdfDocument类。
@@ -98,7 +79,86 @@ document.close();
 
 ![图1.3:Image案例](https://developers.itextpdf.com/sites/default/files/C01F03_0.png)
 <p align="center">图1.3:Image案例</p>
->>>>>>> fd3575065a1959e47f96e3814a06e543d8de78a8
 
+如果我们从[QuickBrownFox](https://developers.itextpdf.com/content/itext-7-jump-start-tutorial/examples/chapter-1#1725-c01e03_quickbrownfox.java)的案例中删除样板式代码，剩下的代码为：
 
+```
+Image fox = new Image(ImageDataFactory.create(FOX));
+Image dog = new Image(ImageDataFactory.create(DOG));
+Paragraph p = new Paragraph("The quick brown ")
+            .add(fox)
+            .add(" jumps over the lazy ")
+            .add(dog);
+document.add(p);
+```
+我们传递了一个图片的路径到ImageDataFactory类中，然后它会返回一个可以用于创建iText图像的对象。ImageDataFactory的任务就是检测并处理一系列类型的图像(jpg、png、git、bmp等等)，确保它可以用在一个PDF中。在这种情况下，我们添加的图像都是段落的一部分。上面的例子中，两个图像分别对应了“fox”和“dog”。
 
+### 导出数据库
+
+许多开发人员使用iText来发布数据库查询结果到一个PDF文档中。假设我们有一个数据库，其中包含美利坚合众国所有的州，我们想创建一个PDF列出这些州及其相关信息到一个表格中，例如图1.4所示。
+
+![Figure 1.4: Table example](https://developers.itextpdf.com/sites/default/files/C01F04_0.png)
+<p align="center">图1.4: Table案例</p>
+
+使用一个真正的数据库可能会增加这个简单案例的复杂性，所以我们仅仅用了一个CSV文件: [united_states.csv](http://gitlab.itextsupport.com/itext7/samples/raw/develop/publications/jumpstart/src/main/resources/data/united_states.csv)。（请看图1.5）
+
+![Figure 1.5: United States CSV file](https://developers.itextpdf.com/sites/default/files/C01F05.png)
+<p align="center">图1.5: 美国各州CSV文件</p>
+
+如果你仔细看这个[UnitedStates](https://developers.itextpdf.com/content/itext-7-jump-start-tutorial/examples/chapter-1#1726-c01e04_unitedstates.java)案例的样板代码，你会发现我们在创建一个文档的时候，做了一点小小的改动（第4行）。我们添加了一个用于定义文档页面大小的额外参数。默认的页面大小是一张A4纸大小，并且印刷的时候也是用的它。所以在这个例子中，我们也在使用A4，但是我们旋转了一下页面（PageSize.A4.rotate()）来让它看起来像图1.4所示的那样。我们也在第五行中改变了一下页边距。默认的情况下，iText使用36个用户单位作为页边距（半英寸）。我们把所有的页边距都改为20个用户单位（这将在下文中作详细的解释）。
+
+```
+PdfWriter writer = new PdfWriter(dest);
+PdfDocument pdf = new PdfDocument(writer);    
+Document document = new Document(pdf, PageSize.A4.rotate());
+document.setMargins(20, 20, 20, 20);
+PdfFont font = PdfFontFactory.createFont(FontConstants.HELVETICA);
+PdfFont bold = PdfFontFactory.createFont(FontConstants.HELVETICA_BOLD);
+Table table = new Table(new float[]{4, 1, 3, 4, 3, 3, 3, 3, 1});
+table.setWidthPercent(100);
+BufferedReader br = new BufferedReader(new FileReader(DATA));
+String line = br.readLine();
+process(table, line, bold, true);
+while ((line = br.readLine()) != null) {
+    process(table, line, font, false);
+}
+br.close();
+document.add(table);
+document.close();
+```
+在这个案例中，我们逐行读取CSV文件数据，并把所有的数据放入一个表格对象中。
+
+我们首先创建了两个同类的PdfFont对象：Helvetica regular(第5行)和Helvetica bold(第6行)。我们创建了一个包含9列的表格对象来定义一个有着9个元素的浮动数组（第7行）。每个浮动定义了一个列的相对宽度。第1列是第2列的4倍宽。第3列是第2列的3倍宽等等。我们也定义了表的宽度是相对于页面的宽度而言的（第8行）。在当前情况下，表将100%使用页面的宽度，最小化页边距。
+
+然后我们从数据常数里取出CSV文件路径并开始读取它的文件内容（第9行）。我们读的第一行将作为列的标题（第10和11行）被处理，我们写了一个process()方法，它使用一个特殊的字体，把每一行无论是否为标题行都添加到表格中来。
+
+```
+public void process(Table table, String line, PdfFont font, boolean isHeader) {
+    StringTokenizer tokenizer = new StringTokenizer(line, ";");
+    while (tokenizer.hasMoreTokens()) {
+        if (isHeader) {
+            table.addHeaderCell(
+                new Cell().add(
+                    new Paragraph(tokenizer.nextToken()).setFont(font)));
+        } else {
+            table.addCell(
+                new Cell().add(
+                    new Paragraph(tokenizer.nextToken()).setFont(font)));
+        }
+    }
+}
+```
+
+我们使用StringTokenizer这个类来循环存储在CSV文件的每一行中的所有字段。并且用指定的字体创建了一个段落。再将该段落添加到新的Cell对象中。并根据是否为标题行，来决定是将这个Cell作为标题单元或者普通单元添加到表中。
+
+在处理好标题行（第11行）之后，代码继续循环其余的行（第12行），并处理剩余的行数（第13行）。如图1.4所示，表格不适合做为单个页面出现。但也没有必要担心这一点：iText会根据需要创建更多新的页面，直到表格完整呈现。iText也将重复标题行，因为我们是通过addHeaderCell()而不是addCell()来添加单元格的。
+
+当我们读完数据之后（第14行），我们将把该表添加到文档对象中（第16行）并关闭它（第17行）。至此，我们就已经成功的导出CSV文件的数据到一个PDF中。
+
+而且这也不难，用少量的几行代码，我们就在一个PDF中成功创建了一个相当不错的表格。
+
+### 总结
+
+通过这几个列子，我们已经看到了iText强大的功能。我们也发现，用编程的方式来创建文档是一件非常简单的事情。在第一章中，我们讨论了的高级对象，如段落、列表、图片、表格和单元格，都是一些iText中最基本的构建块。
+
+然而，很多时候也需要使用一些较为低级的语法来创建PDF。iText通过它的底层API实现了这一点。我们将在第二章中来看一看这些底层方法的例子。
