@@ -6,7 +6,5 @@ ready to translate : [https://developers.itextpdf.com/content/itext-7-jump-start
 
 
 
-
-
-
-
+Should you draw all the content at absolute positions as was explained in the second chapter to meet these specific requirements? By playing with the Star Wars examples, we've experienced that this could lead to code that is quite complex (and code that is hard to maintain). Surely there must be way to combine the high-level approach using the basic building blocks with a more low-level approach that allows us to have more influence on the layout. That's what this third chapter is about.
+你是否应该按照第二章的说明将绝对位置的内容画出来，以满足这些特定的要求？通过玩“星球大战”的例子，我们已经体会到这可能会导致代码非常复杂（代码难以维护）。当然，必须有办法将使用基本构建模块的高层次方法与更低层次的方法相结合，从而使我们对布局有更多的影响。这就是第三章的内容。

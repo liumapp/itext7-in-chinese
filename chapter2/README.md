@@ -107,7 +107,8 @@ Color blueColor = new DeviceCmyk(1.f, 0.156f, 0.f, 0.118f);
 PDF规范（ISO-32000）定义了许多不同的颜色空间，每个颜色空间都在iText的一个单独的类中实现。最常用的颜色空间是DeviceGray（由单个强度参数定义的颜色），DeviceRgb（由三个参数：红色，绿色和蓝色定义）和DeviceCmyk（由四个参数：青色，品红色，黄色和黑色定义）。在我们的例子中，我们使用三种CMYK颜色。
 
 ```
-请注意，我们没有使用java.awt.Color类。我们正在使用iText的Color类，它可以在com.itextpdf.kernel.color包中找到。
+请注意，我们没有使用java.awt.Color类。
+我们正在使用iText的Color类，它可以在com.itextpdf.kernel.color包中找到。
 ```
 我们要创建一个由细蓝线组成的网格：
 ```
