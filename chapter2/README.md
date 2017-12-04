@@ -33,7 +33,9 @@ pdf.close();
 ```
 跳出来的第一件事就是我们不再使用Document对象。就像在前一章中一样，我们创建了一个PdfWriter（第2行）和一个PdfDocument对象，而不是创建一个具有默认或特定页面大小的Document，我们创建一个带有特定PageSize（第2行）的PdfPage（第3行）。在这种情况下，我们使用横向的A4页面。一旦我们有一个PdfPage实例，我们用它来创建一个PdfCanvas（第4行）。我们将使用这个画布对象来创建一个PDF操作符和操作数序列。只要我们完成绘制和绘制任何路径和形状我们要添加到页面，我们关闭PdfDocument（第6行）。
 ```
-在前一章中，我们用document.close（）关闭了Document对象。这隐式关闭了PdfDocument对象。现在没有Document对象，我们必须关闭PdfDocument对象。
+在前一章中，我们用document.close（）关闭了Document对象。
+这隐式关闭了PdfDocument对象。
+现在没有Document对象，我们必须关闭PdfDocument对象。
 ```
 在PDF中，所有测量均以用户单位完成。默认情况下，一个用户单位对应一个点。这意味着一英寸有72个用户单位。在PDF中，X轴指向右侧，Y轴指向上。如果使用PageSize对象创建页面大小，则坐标系的原点应该位于页面的左下角。所有我们用作操作数的坐标，例如m或l，都使用这个坐标系。我们可以通过改变*当前的变换矩阵*来改变坐标系。
 ### 坐标系和变换矩阵
