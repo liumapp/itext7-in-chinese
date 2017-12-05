@@ -95,10 +95,41 @@ public static void addArticle(
 
 之前的案例中，有一个包含美国各州信息的CSV文件被我们读取内容发布到PDF上来，为此，我们在表格对象中创建了一系列的单元格对象，但我们没有定义背景颜色，也没有定义边框的样式，全部都是使用的默认值。
 
+> 一般而言，一个表单的单元格没有背景颜色，边框也是由0.5个用户单位的黑色矩形组成。
 
-
+我们现在把另外一个[premier_league.csv](http://gitlab.itextsupport.com/itext7/samples/raw/develop/publications/jumpstart/src/main/resources/data/premier_league.csv)数据源放入一个表格中，但是这次稍微做了一些调整，请参考图3.2.
 
 ![Figure 3.2: a table with colored cells and rounded borders](https://developers.itextpdf.com/sites/default/files/C03F02_0.png)
+<p align="center">图3.2:五颜六色的表格</p>
+
+我们不会重复样板代码，因为它与之前例子中的代码相同，除了这一行：
+
+```
+PageSize ps = new PageSize(842, 680);
+```
+
+我们在之前的案例都是用的A4纸大小，这次用自定义的842 * 680 pt（17.7 ＊ 9.4 in）。写起来就跟[PremierLeague](https://developers.itextpdf.com/content/itext-7-jump-start-tutorial/examples/chapter-3#1743-c03e02_premierleague.java)这个案例所示范的那样简单。
+
+```
+PdfFont font = PdfFontFactory.createFont(FontConstants.HELVETICA);
+PdfFont bold = PdfFontFactory.createFont(FontConstants.HELVETICA_BOLD);
+Table table = new Table(new float[]{1.5f, 7, 2, 2, 2, 2, 3, 4, 4, 2});
+table.setWidthPercent(100)
+        .setTextAlignment(TextAlignment.CENTER)
+        .setHorizontalAlignment(HorizontalAlignment.CENTER);
+BufferedReader br = new BufferedReader(new FileReader(DATA));
+String line = br.readLine();
+process(table, line, bold, true);
+while ((line = br.readLine()) != null) {
+    process(table, line, font, false);
+}
+br.close();
+document.add(table);
+```
+
+上面的代码跟这个[UnitedStates](https://developers.itextpdf.com/content/itext-7-jump-start-tutorial/examples/chapter-1#1726-c01e04_unitedstates.java)例子比起来，只有细微的差别。在这个例子中，我们把表格的文本内容设置为了居中对齐，并修改了表格本身的水平对齐方式，当然，这并不重要，因为表格本来就占用了可用宽度的100%。下面要说的这个process()方法相对来说要更有趣一点。
+
+
 
 ![Figure 3.3: repeating background color and watermark](https://developers.itextpdf.com/sites/default/files/C03F03_1.png)
 
