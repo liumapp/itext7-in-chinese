@@ -129,7 +129,89 @@ document.add(table);
 
 上面的代码跟这个[UnitedStates](https://developers.itextpdf.com/content/itext-7-jump-start-tutorial/examples/chapter-1#1726-c01e04_unitedstates.java)例子比起来，只有细微的差别。在这个例子中，我们把表格的文本内容设置为了居中对齐，并修改了表格本身的水平对齐方式，当然，这并不重要，因为表格本来就占用了可用宽度的100%。下面要说的这个process()方法相对来说要更有趣一点。
 
+```
+public void process(Table table, String line, PdfFont font, boolean isHeader) {
+    StringTokenizer tokenizer = new StringTokenizer(line, ";");
+    int columnNumber = 0;
+    while (tokenizer.hasMoreTokens()) {
+        if (isHeader) {
+            Cell cell = new Cell().add(new Paragraph(tokenizer.nextToken()));
+            cell.setNextRenderer(new RoundedCornersCellRenderer(cell));
+            cell.setPadding(5).setBorder(null);
+            table.addHeaderCell(cell);
+        } else {
+            columnNumber++;
+            Cell cell = new Cell().add(new Paragraph(tokenizer.nextToken()));
+            cell.setFont(font).setBorder(new SolidBorder(Color.BLACK, 0.5f));
+            switch (columnNumber) {
+                case 4:
+                    cell.setBackgroundColor(greenColor);
+                    break;
+                case 5:
+                    cell.setBackgroundColor(yellowColor);
+                    break;
+                case 6:
+                    cell.setBackgroundColor(redColor);
+                    break;
+                default:
+                    cell.setBackgroundColor(blueColor);
+                    break;
+            }
+            table.addCell(cell);
+        }
+    }
+}
+```
 
+先从最普通的单元格开始说起，在第16，19，22以及25行中，我们根据列号改变了背景颜色。
+
+在第13行，设置了单元格内容的字体，并使用setBorder()方法替换了默认的边框，这个方法将边框重新定义为一个0.5pt线宽的黑色实边框。
+
+> SolidBorder是Border类的一个子类，它也有像DashedBorder、DottedBorder、DoubleBorder等等这样的兄弟类。如果您在这些类中找不到想要的边界类，您可以自行对它们进行扩展，这些现有的实现应该可以为您提供一些灵感，比如，您可以通过创建自己的CellRenderer来实现。
+
+我们在第7行使用了一个自定义的RoundedCornersCellRenderer()，在第8行，给单元格的内容定义了填充色，然后把边框设置为null。如果setBorder(null)这个方法不存在，则会绘制两个边框：一个是由iText自己绘制的，一个是由我们下面将要说的单元格渲染器来绘制。
+
+```
+private class RoundedCornersCellRenderer extends CellRenderer {
+    public RoundedCornersCellRenderer(Cell modelElement) {
+        super(modelElement);
+    }
+ 
+    @Override
+    public void drawBorder(DrawContext drawContext) {
+        Rectangle rectangle = getOccupiedAreaBBox();
+        float llx = rectangle.getX() + 1;
+        float lly = rectangle.getY() + 1;
+        float urx = rectangle.getX() + getOccupiedAreaBBox().getWidth() - 1;
+        float ury = rectangle.getY() + getOccupiedAreaBBox().getHeight() - 1;
+        PdfCanvas canvas = drawContext.getCanvas();
+        float r = 4;
+        float b = 0.4477f;
+        canvas.moveTo(llx, lly).lineTo(urx, lly).lineTo(urx, ury - r)
+                .curveTo(urx, ury - r * b, urx - r * b, ury, urx - r, ury)
+                .lineTo(llx + r, ury)
+                .curveTo(llx + r * b, ury, llx, ury - r * b, llx, ury - r)
+                .lineTo(llx, lly).stroke();
+        super.drawBorder(drawContext);
+    }
+}
+```
+
+CellRenderer类是BlockRenderer类的特殊实现。
+
+> BlockRenderer类可以用在段落、列表这样的块元素上。继承自它的渲染器类也允许您通过重写draw()方法来自定义功能，比如：创建一个段落的的自定义背景。ps:CellRenderer也有一个drawBorder()方法噢。
+
+我们通过重写drawBorder()方法来绘制一个顶部更丰满的矩形（第6到21行）。getOccupiedAreaBBox()这个方法返回了一个Rectangle矩形对象，可以使用它来找到块元素的边界框(第8行)。像getX()，getY()，getWidth()以及getHeight()这样的方法就是用来定义单元格的左下角和右上角的坐标(第9-12行)。
+
+drawContext这个对象的getCanvas()方法允许我们获取一个PdfCanvas的实例（第13行）。我们用一系列直线和曲线把边界绘制了出来（14-20行）。上面写的例子就很好的演示了：在绘制由单元格组成的表的过程中，如何把相关对象的高级方法和我们之前几乎手动创建PDF的低级方法相结合，以便精确地绘制出符合需求的边界。
+
+> 虽然绘制曲线的代码涉及到一些数学知识，但也不是什么很深奥的东西。大部分常见的边框的种类也都被iText包含在内了，所以您也不必担心引擎里面包含的数学知识。
+
+关于BlockRenderer还有很多的内容需要介绍，但我们就此打住，把那些知识留在下一篇教程里去详细叙述。接下来，让我们用一在每一个页面上自动添加背景、页眉、页脚、水印和页码的例子来结束这一章节。
+
+### 事件处理
 
 ![Figure 3.3: repeating background color and watermark](https://developers.itextpdf.com/sites/default/files/C03F03_1.png)
+
+
 
