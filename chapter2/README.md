@@ -90,6 +90,7 @@ canvas.stroke();
 
 通常有不止一种方法可以在画布上绘制线条和形状。这将导致我们对PDF文件的生产速度，对文件大小的影响，以及在PDF阅读器中呈现文档的速度等方面的不同方法的优缺点进行说明。这是另一个教程中需要进一步讨论的问题。
 >还有一些具体的规则需要考虑。例如：saveState()和restoreState()的序列需要平衡。每个saveState()都需要一个restoreState(); 禁止使用saveState()之前的restoreState()。
+
 现在让我们通过改变线条宽度，引入短划线模式，以及应用不同的笔触颜色来修改本章的第一个例子，从而得到如图2.2所示的PDF。
 ![](https://developers.itextpdf.com/sites/default/files/C02F02.png "图2.2：绘制一个网格")
 <p align="center">图2.2：绘制一个网格</p>
