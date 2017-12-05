@@ -22,7 +22,7 @@ canvas.moveTo(-406, 0)
 
 <p align="center">图2.1：绘制X和Y轴</p>
 
-显示X和Y轴的PDF是使用Axes示例创建的。现在开始一步一步检查这个例子。
+显示X和Y轴的PDF是使用[Axes](https://developers.itextpdf.com/content/itext-7-jump-start-tutorial/examples/chapter-2#1734-c02e01_axes.java)示例创建的。现在开始一步一步检查这个例子。
 ```
 PdfDocument pdf = new PdfDocument(new PdfWriter(dest));
 PageSize ps = PageSize.A4.rotate();
@@ -94,7 +94,7 @@ canvas.stroke();
 现在让我们通过改变线条宽度，引入短划线模式，以及应用不同的笔触颜色来修改本章的第一个例子，从而得到如图2.2所示的PDF。
 ![](https://developers.itextpdf.com/sites/default/files/C02F02.png "图2.2：绘制一个网格")
 <p align="center">图2.2：绘制一个网格</p>
-在GridLines示例中，我们首先定义一系列Color对象：
+在[GridLines](https://developers.itextpdf.com/content/itext-7-jump-start-tutorial/examples/chapter-2#1735-c02e02_gridlines.java)示例中，我们首先定义一系列Color对象：
 
 ```
 Color grayColor = new DeviceCmyk(0.f, 0.f, 0.f, 0.875f);
@@ -143,7 +143,7 @@ canvas.setLineWidth(2).setStrokeColor(greenColor)
 
 创建这种PDF的最好方法是使用具有不同对齐的段落对象序列-标题中心; 左对齐正文文本），并将这些段落添加到一个Document对象。使用高级方法将文本分布在多行，如果内容不符合页面宽度，则自动引入换行符;如果剩余内容不符合页面高度，则使用分页符。
 
-当我们使用低级方法添加文本时，所有这些都不会发生。我们需要将内容分解成小块文本，正如StarWars示例中所做的那样：
+当我们使用低级方法添加文本时，所有这些都不会发生。我们需要将内容分解成小块文本，正如[StarWars](https://developers.itextpdf.com/content/itext-7-jump-start-tutorial/examples/chapter-2#1736-c02e03_starwars.java)示例中所做的那样：
 ```
 List<String> text = new ArrayList();
 text.add("         Episode V         ");
@@ -187,7 +187,7 @@ canvas.endText();
 
 <p align="center">图2.4：在绝对位置添加倾斜的和彩色的文本</p>
 
-更改背景的颜色是StarWarsCrawl示例中的简单部分：
+更改背景的颜色是[StarWarsCrawl](https://developers.itextpdf.com/content/itext-7-jump-start-tutorial/examples/chapter-2#1737-c02e04_starwarscrawl.java)示例中的简单部分：
 ```
 canvas.rectangle(0, 0, ps.getWidth(), ps.getHeight())
         .setColor(Color.BLACK, true)
