@@ -94,7 +94,7 @@ canvas.stroke();
 现在让我们通过改变线条宽度，引入短划线模式，以及应用不同的笔触颜色来修改本章的第一个例子，从而得到如图2.2所示的PDF。
 ![](https://developers.itextpdf.com/sites/default/files/C02F02.png "图2.2：绘制一个网格")
 <p align="center">图2.2：绘制一个网格</p>
-在[GridLines](https://developers.itextpdf.com/content/itext-7-jump-start-tutorial/examples/chapter-2#1735-c02e02_gridlines.java)
+在[Axes](https://developers.itextpdf.com/content/itext-7-jump-start-tutorial/examples/chapter-2#1734-c02e01_axes.java)
 示例中，我们首先定义一系列Color对象：
 
 ```
