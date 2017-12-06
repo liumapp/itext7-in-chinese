@@ -211,7 +211,79 @@ drawContext这个对象的getCanvas()方法允许我们获取一个PdfCanvas的�
 
 ### 事件处理
 
-![Figure 3.3: repeating background color and watermark](https://developers.itextpdf.com/sites/default/files/C03F03_1.png)
+当我们向一个文档添加一个包含多行的表格时，这个表格很可能会分布在不同的页面上。在图3.3中，我们列出了一个包含不明飞行物目击的清单[fo.csv](http://gitlab.itextsupport.com/itext7/samples/raw/develop/publications/jumpstart/src/main/resources/data/ufo.csv)。每个奇数页的背景彩石灰色，每个偶数页的背景是蓝色，每个页面的顶部都有一个标题“THE TRUTH IS OUT OUTERE”，底部都有页码，中间都带有一段"CONFIDENTIAL"的水印。=
 
+![Figure 3.3: repeating background color and watermark](https://developers.itextpdf.com/sites/default/files/C03F03_1.png)
+<p align="center">图3.3: 重复的背景颜色和水印</p>
+
+ 这个[UFO](https://developers.itextpdf.com/content/itext-7-jump-start-tutorial/examples/chapter-3#1744-c03e03_ufo.java)的例子，里面创建表格的代码相信您已经看到过很多遍了。
+
+```
+PdfDocument pdf = new PdfDocument(new PdfWriter(dest));
+pdf.addEventHandler(PdfDocumentEvent.END_PAGE, new MyEventHandler());
+Document document = new Document(pdf);
+Paragraph p = new Paragraph("List of reported UFO sightings in 20th century")
+        .setTextAlignment(Property.TextAlignment.CENTER)
+        .setFont(helveticaBold).setFontSize(14);
+document.add(p);
+Table table = new Table(new float[]{3, 5, 7, 4});
+table.setWidthPercent(100);
+BufferedReader br = new BufferedReader(new FileReader(DATA));
+String line = br.readLine();
+process(table, line, helveticaBold, true);
+while ((line = br.readLine()) != null) {
+    process(table, line, helvetica, false);
+}
+br.close();
+document.add(table);
+document.close();
+```
+
+在这段代码中，我们通过往setTextAlignment()这个方法中设置Property.TextAlignment.CENTER这个值，来使添加的段落居中。然后循环处理一个CSV文件每一行的内容，就像之前处理其他行一样。
+
+这个例子里面第二行是重点，要考的。我们给PdfDocument的实例pdf添加了一个MyEventHandler类型的事件处理器。这个MyEventHandler实现了IEventHandler接口，虽然这个接口只有一个方法“handleEvent()”的说，每当PdfDocument.Event.END_PAGE类型的事件发生时都会触发这个方法。也就是说，无论是因为新页面被创建，或者已经到了最后一页，只要iText完成向页面添加内容，都会触发上述方法。
+
+接下来看看IEventHandler的具体实现。
+
+```
+protected class MyEventHandler implements IEventHandler {
+    public void handleEvent(Event event) {
+        PdfDocumentEvent docEvent = (PdfDocumentEvent) event;
+        PdfDocument pdfDoc = docEvent.getDocument();
+        PdfPage page = docEvent.getPage();
+        int pageNumber = pdfDoc.getPageNumber(page);
+        Rectangle pageSize = page.getPageSize();
+        PdfCanvas pdfCanvas = new PdfCanvas(
+            page.newContentStreamBefore(), page.getResources(), pdfDoc);
+ 
+        //Set background
+        Color limeColor = new DeviceCmyk(0.208f, 0, 0.584f, 0);
+        Color blueColor = new DeviceCmyk(0.445f, 0.0546f, 0, 0.0667f);
+        pdfCanvas.saveState()
+                .setFillColor(pageNumber % 2 == 1 ? limeColor : blueColor)
+                .rectangle(pageSize.getLeft(), pageSize.getBottom(),
+                    pageSize.getWidth(), pageSize.getHeight())
+                .fill().restoreState();
+        //Add header and footer
+        pdfCanvas.beginText()
+                .setFontAndSize(helvetica, 9)
+                .moveText(pageSize.getWidth() / 2 - 60, pageSize.getTop() - 20)
+                .showText("THE TRUTH IS OUT THERE")
+                .moveText(60, -pageSize.getTop() + 30)
+                .showText(String.valueOf(pageNumber))
+                .endText();
+        //Add watermark
+        Canvas canvas = new Canvas(pdfCanvas, pdfDoc, page.getPageSize());
+        canvas.setFontColor(Color.WHITE);
+        canvas.setProperty(Property.FONT_SIZE, 60);
+        canvas.setProperty(Property.FONT, helveticaBold);
+        canvas.showTextAligned(new Paragraph("CONFIDENTIAL"),
+            298, 421, pdfDoc.getPageNumber(page),
+            TextAlignment.CENTER, VerticalAlignment.MIDDLE, 45);
+ 
+        pdfCanvas.release();
+    }
+}
+```
 
 
