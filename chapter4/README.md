@@ -5,18 +5,18 @@
 [forms](https://developers.itextpdf.com/tags/forms)
 [AcroForm](https://developers.itextpdf.com/tags/acroform)
 
-![](https://developers.itextpdf.com/sites/default/files/C04F01.png "图4.1:一个文本注释
+![](https://developers.itextpdf.com/sites/default/files/C04F01.png "图4.1:一个文本注解
 ")
 
-在前面的章节中，我们通过向页面添加内容来创建PDF文档。如果我们添加高级对象（如段落）或低级指令（例如lineTo()，moveTo()，stroke()），iText将所有内容转换为写入到其中的PDF语法，更多的内容流。在本章中，我们将添加不同性质的内容。我们将添加交互功能，称为注释。注释不是内容流的一部分。他们通常被添加在现有的内容之上。有许多不同类型的注释，其中许多允许用户交互。
+在前面的章节中，我们通过向页面添加内容来创建PDF文档。如果我们添加高级对象（如段落）或低级指令（例如lineTo()，moveTo()，stroke()），iText将所有内容转换为写入到其中的PDF语法，更多的内容流。在本章中，我们将添加不同性质的内容。我们将添加交互功能，称为注解。注解不是内容流的一部分。他们通常被添加在现有的内容之上。有许多不同类型的注解，其中许多允许用户交互。
 ### 添加注解
-我们将从一系列简单的例子开始。图4.1显示了一个带有文本段落的PDF。在文本的顶部，我们添加了一个绿色文本注释。
-![](https://developers.itextpdf.com/sites/default/files/C04F01.png "图4.1：文本注释
+我们将从一系列简单的例子开始。图4.1显示了一个带有文本段落的PDF。在文本的顶部，我们添加了一个绿色文本注解。
+![](https://developers.itextpdf.com/sites/default/files/C04F01.png "图4.1：文本注解
 ")
 
-<p align="center">图4.1：文本注释</p>
+<p align="center">图4.1：文本注解</p>
 
-TextAnnotation示例的大部分代码与Hello World示例相同。唯一的区别是我们创建并添加一个注释：
+TextAnnotation示例的大部分代码与Hello World示例相同。唯一的区别是我们创建并添加一个注解：
 ```
 PdfAnnotation ann = new PdfTextAnnotation(new Rectangle(20, 800, 0, 0))
     .setColor(Color.GREEN)
@@ -26,15 +26,15 @@ PdfAnnotation ann = new PdfTextAnnotation(new Rectangle(20, 800, 0, 0))
     .setOpen(true);
 pdf.getFirstPage().addAnnotation(ann);
 ```
-我们使用Rectangle定义文本注释的位置。我们设置颜色，标题（一个PdfString），内容（一个字符串）和注解的打开状态。我们问PdfDocument的第一页，并添加注释。
+我们使用Rectangle定义文本注解的位置。我们设置颜色，标题（一个PdfString），内容（一个字符串）和注解的打开状态。我们问PdfDocument的第一页，并添加注解。
 
-在图4.2中，我们创建了一个不可见的注释，但是如果将鼠标悬停在其位置上，则会显示一个URL。你可以通过单击注释来打开该URL。这是一个链接注释。
+在图4.2中，我们创建了一个不可见的注解，但是如果将鼠标悬停在其位置上，则会显示一个URL。你可以通过单击注解来打开该URL。这是一个链接注解。
 
-![](https://developers.itextpdf.com/sites/default/files/C04F02.png "图4.2：一个链接注释")
+![](https://developers.itextpdf.com/sites/default/files/C04F02.png "图4.2：一个链接注解")
 
-<p align="center">图4.2：一个链接注释</p>
+<p align="center">图4.2：一个链接注解</p>
 
-由于注释是一个句子的一部分，如果我们必须计算单词“here”的位置，这很不方便。幸运的是，可以将链接注释包装在一个Link对象中，iText会自动计算Rectangle。LinkAnnotation示例显示了如何完成。
+由于注解是一个句子的一部分，如果我们必须计算单词“here”的位置，这很不方便。幸运的是，可以将链接注解包装在一个Link对象中，iText会自动计算Rectangle。LinkAnnotation示例显示了如何完成。
 ```
 PdfLinkAnnotation annotation = new PdfLinkAnnotation(new Rectangle(0, 0))
         .setAction(PdfAction.createURI("http://itextpdf.com/"));
@@ -44,13 +44,13 @@ Paragraph p = new Paragraph("The example of link annotation. Click ")
         .add(" to learn more...");
 document.add(p);
 ```
-在第2行中，我们创建了一个打开iText网站的URI操作。我们将这个动作用于链接注释，然后创建一个Link对象。这是接受链接注释作为参数的基本构建块。此链接注释将不会添加到内容流中，因为注释不是内容流的一部分。相反，它将被添加到相应坐标的相应页面。使文字可点击不会改变内容流中文字的外观。在例子中，我们强调了“here”这个词，以便我们知道在哪里点击。
+在第2行中，我们创建了一个打开iText网站的URI操作。我们将这个动作用于链接注解，然后创建一个Link对象。这是接受链接注解作为参数的基本构建块。此链接注解将不会添加到内容流中，因为注解不是内容流的一部分。相反，它将被添加到相应坐标的相应页面。使文字可点击不会改变内容流中文字的外观。在例子中，我们强调了“here”这个词，以便我们知道在哪里点击。
 
-每种类型的注释都需要自己的参数类型。图4.3显示了一个带有线条注释的页面。
+每种类型的注解都需要自己的参数类型。图4.3显示了一个带有线条注解的页面。
 
-![](https://developers.itextpdf.com/sites/default/files/C04F03.png "图4.3：一个线条注释")
+![](https://developers.itextpdf.com/sites/default/files/C04F03.png "图4.3：一个线条注解")
 
-<p align="center">图4.3：一个线条注释</p>
+<p align="center">图4.3：一个线条注解</p>
 
 [LineAnnotation](https://developers.itextpdf.com/content/itext-7-jump-start-tutorial/examples/chapter-4#1758-c04e01_03_lineannotation.java)显示创建此外观所需的内容。
 ```
@@ -70,13 +70,13 @@ PdfAnnotation annotation = new PdfLineAnnotation(
 page.addAnnotation(annotation);
 pdf.close();
 ```
-在这个例子中，我们将注释添加到新创建的页面。这个例子中没有Document实例。
+在这个例子中，我们将注解添加到新创建的页面。这个例子中没有Document实例。
 
-ISO-32000-2定义了28种不同的注释类型，其中两种在PDF 2.0中不推荐使用。使用iText，你可以将所有这些注释类型添加到PDF文档中，但在本教程的上下文中，我们只会看一个示例，然后再转到交互式表单。见图4.4：
+ISO-32000-2定义了28种不同的注解类型，其中两种在PDF 2.0中不推荐使用。使用iText，你可以将所有这些注解类型添加到PDF文档中，但在本教程的上下文中，我们只会看一个示例，然后再转到交互式表单。见图4.4：
 
-![](https://developers.itextpdf.com/sites/default/files/C04F04.png "图4.4：标记注释")
+![](https://developers.itextpdf.com/sites/default/files/C04F04.png "图4.4：标记注解")
 
-<p align="center">图4.4：标记注释</p>
+<p align="center">图4.4：标记注解</p>
 
 看看[TextMarkupAnnotation](https://developers.itextpdf.com/content/itext-7-jump-start-tutorial/examples/chapter-4#1759-c04e01_04_textmarkupannotation.java)的例子，能看到我们确实需要一个单独的教程来理解这个代码片段中使用的所有细节。
 ```
@@ -91,7 +91,7 @@ PdfAnnotation ann = PdfTextMarkupAnnotation.createHighLight(
     .setRectangle(new PdfArray(new float[]{100, 600, 200, 100}));
 pdf.getFirstPage().addAnnotation(ann);
 ```
-在下一节中，我们将创建一个由不同表单域组成的交互式表单。表单中的每个表单字段都将与一个窗口小部件注释对应，但这些注释将被隐式创建。
+在下一节中，我们将创建一个由不同表单域组成的交互式表单。表单中的每个表单字段都将与一个窗口小部件注解对应，但这些注解将被隐式创建。
 
 ### 创建一个交互式表单
 在下一个例子中，我们将创建一个基于AcroForm技术的交互式表单。该技术是在PDF 1.2（1996）中引入的，允许你使用表单字段填充PDF文档，例如文本字段，选项（组合框或列表字段），按钮（按钮，复选框和单选按钮）以及签名字段。
@@ -110,11 +110,11 @@ pdf.getFirstPage().addAnnotation(ann);
 
 <p align="center">图4.5：一个交互式表单</p>
 
-在图4.5中，可以看到文本字段，单选按钮，复选框，组合框，多行文本字段和按钮。我们看到这些字段是因为它们由一个小部件注释表示。当创建一个字段时，这个小部件注释是隐式创建的。在JobApplication示例中，我们使用从Document对象获取的PdfDocument实例创建一个PdfAcroForm对象。第二个参数是布尔值，表示如果没有现有表单，是否需要创建新表单。由于我们刚刚创建了文档，目前还没有任何表单，所以参数应该是正确的：
+在图4.5中，可以看到文本字段，单选按钮，复选框，组合框，多行文本字段和按钮。我们看到这些字段是因为它们由一个小部件注解表示。当创建一个字段时，这个小部件注解是隐式创建的。在JobApplication示例中，我们使用从Document对象获取的PdfDocument实例创建一个PdfAcroForm对象。第二个参数是布尔值，表示如果没有现有表单，是否需要创建新表单。由于我们刚刚创建了文档，目前还没有任何表单，所以参数应该是正确的：
 ```
 PdfAcroForm form = PdfAcroForm.getAcroForm(doc.getPdfDocument(), true);
 ```
-现在可以开始添加字段。我们将使用Rectangle来定义每个小部件注释的维度及其在页面上的位置。
+现在可以开始添加字段。我们将使用Rectangle来定义每个小部件注解的维度及其在页面上的位置。
 ### 文本域
 这部分内容将从用于全名的文本字段开始。
 ```
@@ -122,7 +122,7 @@ PdfTextFormField nameField = PdfTextFormField.createText(
     doc.getPdfDocument(), new Rectangle(99, 753, 425, 15), "name", "");
 form.addField(nameField);
 ```
-createText()方法需要一个PdfDocument实例，一个Rectangle，该字段的名称和一个默认值（在这种情况下，默认值是一个空字符串）。请注意，字段的标签和小部件注释是两个不同的东西。我们已经使用段落添加了“Full name:”。该段落是内容流的一部分，而该字段本身不属于内容流。它使用小部件注释表示。
+createText()方法需要一个PdfDocument实例，一个Rectangle，该字段的名称和一个默认值（在这种情况下，默认值是一个空字符串）。请注意，字段的标签和小部件注解是两个不同的东西。我们已经使用段落添加了“Full name:”。该段落是内容流的一部分，而该字段本身不属于内容流。它使用小部件注解表示。
 ### 单选按钮
 我们创建一个无线电领域来选择一种语言。请注意，有一个名为language的radio组有五个未命名的按钮字段，每个语言可以选择一个：
 ```
@@ -254,13 +254,13 @@ fields.get("info").setValue("I was 38 years old when I became an MI6 agent.");
 form.flattenFields();
 pdf.close();
 ```
-在我们设置了表单字段的所有值后，我们添加第13行：form.flattenFields()，所有的字段将被删除; 相应的小部件注释将被其内容替换。
+在我们设置了表单字段的所有值后，我们添加第13行：form.flattenFields()，所有的字段将被删除; 相应的小部件注解将被其内容替换。
 ###  总结
-我们通过寻找少量的注释类型来开始本章：
-* 一个文本注释，
-* 链接注释，
-* 一个线条注释，
-* 和一个文本标记注释。
-我们还提到了小部件注释。这导致我们到互动形式的主题。我们学会了如何创建一个表单，但更重要的是如何填写和拼合表单。
+我们通过寻找少量的注解类型来开始本章：
+* 一个文本注解，
+* 链接注解，
+* 一个线条注解，
+* 和一个文本标记注解。
+我们还提到了小部件注解。这导致我们到互动形式的主题。我们学会了如何创建一个表单，但更重要的是如何填写和拼合表单。
 
 在填充和压扁的例子中，我们遇到了一个新的类，PdfReader。在下一章中，我们将看看更多使用这个类的例子。
