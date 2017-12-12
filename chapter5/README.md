@@ -2,10 +2,16 @@ ready to translate : [https://developers.itextpdf.com/content/itext-7-jump-start
 
 ## 第5章：操纵一个现有的PDF文档
 
+第1章到第3章的例子中，我们总是从头开始用iText创建一个新的PDF文档。第四章的最后几个例子中用的是一个现有的PDF文档，通过对这个PDF表格进行数据的填写，让它不再具有交互性或者带了一些预设值。接下来的第五章里，我们将继续使用现有的PDF。首先通过PdfReader加载一个现有的文件，然后用reader对象来创建一个新的PdfDocument。
+
 ### 添加注解及内容
+
+在前面的章节中，我们使用了一个现有的PDF表单job_application.pdf，并填写了其中的相关字段。在这一章中，我们会更进一步。我们将开始添加一个文本注解，一些文本和一个新的复选框。如图5.1所示。
 
 ![Figure 5.1: an updated form](https://developers.itextpdf.com/sites/default/files/C05F01.png)
 <p align="center">图5.1:可修改的表单</p>
+
+我们将重复之前AddAnnotationsAndContent例子中的代码。
 
 ```
 PdfDocument pdfDoc =
