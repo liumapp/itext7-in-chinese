@@ -20,6 +20,10 @@ PdfDocument pdfDoc =
 pdfDoc.close();
 ```
 
+在上面的代码中，有一段"add content"的注释，我们将从这里开始添加注解，包括额外的文本和复选框。
+
+就像第4章中的例子一样，我们将注解添加到从PdfDocument实例中获取的页面：
+
 ```
 PdfAnnotation ann = new PdfTextAnnotation(new Rectangle(400, 795, 0, 0))
     .setTitle(new PdfString("iText"))
@@ -27,6 +31,8 @@ PdfAnnotation ann = new PdfTextAnnotation(new Rectangle(400, 795, 0, 0))
     .setOpen(true);
 pdfDoc.getFirstPage().addAnnotation(ann);
 ```
+
+如果我们想要把内容添加到内容流中，则需要创建一个PdfCanvas对象，之后可以使用PdfPage对象作为PdfCanvas构造函数的参数：
 
 ```
 PdfCanvas canvas = new PdfCanvas(pdfDoc.getFirstPage());
