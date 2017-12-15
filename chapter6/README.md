@@ -7,14 +7,14 @@ ready to translate : [https://developers.itextpdf.com/content/itext-7-jump-start
 [iText7](https://developers.itextpdf.com/tags/itext-7)
 [jump start tutorial](https://developers.itextpdf.com/tags/jump-start-tutorial)
 
-在本章中，我们将做更多的文档操作，但是在方法上会有细微的差别。在上一章的例子中，我们创建了一个PdfDocument实例，它将一个PdfReader链接到一个PdfWriter。我们操纵一个单一的文件。
+这一章中，我们将做更多的文档操作，但是在方法上会有细微的差别。在上一章的例子中，我们创建了一个PdfDocument实例，它将一个PdfReader链接到一个PdfWriter，因此我们可以操纵一个单一的文件。
 
 在本章中，我们将始终创建至少两个PdfDocument实例：一个或多个源文档，一个用于目标文档。
 
 我们从一些缩放和平铺文档的例子开始。
 
 ### 缩放PDF页面
-假设我们有一个单页的PDF文件，大小为16.54英寸，大小为11.69英寸，见图6.1
+假设我们有一个单页的PDF文件，大小为16.54英寸 x 11.69英寸，见图6.1
 ![](https://developers.itextpdf.com/sites/default/files/C06F01_1.png "图6.1：金门大桥，原尺寸为16.54 x 11.69英寸")
 <p align="center">图6.1：金门大桥，原尺寸为16.54 x 11.69英寸</p>
 
@@ -59,13 +59,13 @@ canvas.addXObject(pageCopy, 0, 0);
 pdf.close();
 origPdf.close();
 ```
-在这个代码片段中，我们创建一个PdfDocument实例，它将创建一个新的PDF文档（第1行）; 我们创建一个PdfDocument实例来读取现有的PDF文档（第2行）。我们为现有的PDF的第一页（第3行）获得一个PdfPage实例，并且我们得到它的尺寸（第4行）。然后，我们添加三个页面到新的PDF文档：
+在这个代码片段中，我们创建一个PdfDocument实例，它将创建一个新的PDF文档（第1行）; 我们创建一个PdfDocument实例来读取现有的PDF文档（第2行）。为现有的PDF的第一页（第3行）获得一个PdfPage实例，并且得到它的尺寸（第4行）。然后，添加三个页面到新的PDF文档：
 
->1、我们使用横向（第7行）添加A4页面，并为该页面创建一个PdfCanvas对象。我们使用getScaleInstance（）方法（第9-12行）使用AffineTransform实例，而不是计算将缩放坐标系的变换矩阵的a，b，c，d，e和f值。我们应用该转换（第13行），我们创建了一个包含原始页面（第14行）的表单XObject，并将该XObject添加到新页面（第15行）。
+>1、使用横向（第7行）添加A4页面，并为该页面创建一个PdfCanvas对象。我们使用getScaleInstance（）方法（第9-12行）使用AffineTransform实例，而不是计算缩放坐标系的变换矩阵的a，b，c，d，e和f值。我们应用该转换（第13行），创建了一个包含原始页面（第14行）的表单XObject，并将该XObject添加到新页面（第15行）。
 
 >2、以原始尺寸添加原始页面要容易得多。我们通过将origPage复制到新的PdfDocument实例来创建一个新页面，并使用addPage（）方法（第18行）将它添加到pdf中。
 
->3、放大和缩小的方式完全相同。这一次，我们使用横向方向（第21行）添加一个新的A2页面，我们使用与以前相同的代码来缩放坐标系（第23-27行）。我们重用pageCopy对象并将其添加到画布（第29行）。
+>3、放大和缩小的方式完全相同。这一次，我们使用横向方向（第21行）添加一个新的A2页面，我们使用与以前相同的代码来缩放坐标系（第23-27行），重用pageCopy对象并将其添加到画布（第29行）。
 
 我们关闭pdf以完成新文档（第30行），并关闭origPdf以释放原始文档的资源。
 
@@ -76,7 +76,7 @@ origPdf.close();
 ![](https://developers.itextpdf.com/sites/default/files/C06F04.png "图6.4：金门大桥，平铺页面")
 <p align="center">图6.4：金门大桥，平铺页面</p>
 
-我们来看一下[TheGoldenGateBridge_Tiles](https://developers.itextpdf.com/content/itext-7-jump-start-tutorial/examples/chapter-6#1783-c06e02_thegoldengatebridge_tiles.java)示例。
+接下来来看一下[TheGoldenGateBridge_Tiles](https://developers.itextpdf.com/content/itext-7-jump-start-tutorial/examples/chapter-6#1783-c06e02_thegoldengatebridge_tiles.java)示例。
 ```
 PdfDocument pdf = new PdfDocument(new PdfWriter(dest));
 PdfDocument sourcePdf = new PdfDocument(new PdfReader(src));
@@ -112,9 +112,9 @@ canvas.addXObject(pageCopy, -orig.getWidth() / 2f, 0);
 pdf.close();
 sourcePdf.close();
 ```
-我们以前看过1-5行; 我们已经在前面的例子中使用了它们。在第7行中，我们定义了一个图块大小，我们创建了一个transformationMatrix来根据原始大小和图块大小来缩放坐标系。然后，我们逐个添加拼贴：第12-15行，第17-20行，第22-25行和第27-30行是相同的，除了一个细节：addXObject（）方法中使用的偏移量。
+我们以前看过1-5行; 已经在前面的例子中使用了它们。在第7行中定义了一个图块大小，我们创建了一个transformationMatrix来根据原始大小和图块大小来缩放坐标系。然后，逐个添加拼贴：第12-15行，第17-20行，第22-25行和第27-30行是相同的，除了一个细节：addXObject（）方法中使用的偏移量。
 
-让我们再次使用带有金门大桥的PDF作为例子。让我们来做一个平铺的对立面：让我们N-up PDF。
+现在再次使用带有金门大桥的PDF作为例子，来做一个平铺的对立面：让我们N-up PDF。
 ### N-加一个PDF
 图6.5显示了N-upping的含义。在下一个例子中，我们将把N个页面放在一个页面上。
 ![](https://developers.itextpdf.com/sites/default/files/C06F05.png "图6.5：金门大桥，一页四页")
@@ -149,7 +149,7 @@ sourcePdf.close();
 到目前为止，本章只重复使用单个PDF中的单个页面。在接下来的一系列例子中，我们将把不同的PDF文件组合成一个。
 
 ### 汇编文件
-我们从旧金山到洛杉矶，看看图6.6，我们可以找到关于奥斯卡的三个文件。
+在图6.6中，我们从旧金山到洛杉矶，可以找到关于奥斯卡的三个文件。
 ![](https://developers.itextpdf.com/sites/default/files/C0606.png "图6.6：奥斯卡，源文件")
 <p align="center">图6.6：奥斯卡，源文件</p>
 
@@ -179,9 +179,9 @@ firstSourcePdf.close();
 secondSourcePdf.close();
 pdf.close();
 ```
-我们创建一个PdfDocument来创建一个新的PDF（第1行）。PdfMerger类是新的。这是一个让我们更容易重用现有文档页面的类（第2行）。就像以前一样，我们为源文件创建一个PdfDocument（第4行，第7行）。然后我们将所有页面添加到合并实例（第5行，第8行）。一旦我们完成添加页面，我们将合并（）（第10行）和close（）（第11-13行）。
+我们创建一个PdfDocument来创建一个新的PDF（第1行）。PdfMerger类是新的。这是一个让我们更容易重用现有文档页面的类（第2行）。就像以前一样，我们为源文件创建一个PdfDocument（第4行，第7行）。然后将所有页面添加到合并实例（第5行，第8行）。一旦我们完成添加页面，将合并（）（第10行）和close（）（第11-13行）。
 
-如果我们不想要，我们不需要添加所有的页面。我们可以轻松地添加一个有限的选择页面。例如见[88th_Oscar_CombineXofY](https://developers.itextpdf.com/content/itext-7-jump-start-tutorial/examples/chapter-6#1786-c06e05_88th_oscar_combinexofy.java)例子。
+如果我们不想要，不需要添加所有的页面。我们可以轻松地添加一个有限的选择页面。例如见[88th_Oscar_CombineXofY](https://developers.itextpdf.com/content/itext-7-jump-start-tutorial/examples/chapter-6#1786-c06e05_88th_oscar_combinexofy.java)例子。
 ```
 PdfDocument pdf = new PdfDocument(new PdfWriter(dest));
 PdfMerger merger = new PdfMerger(pdf);
@@ -194,13 +194,13 @@ firstSourcePdf.close();
 secondSourcePdf.close();
 pdf.close();
 ```
-现在的文件只有六页。第一个文档（第一个页面重复）中的页面1,5,7,1，第二个文档中的页面1和15。PdfMerger是一个便利的类，使合并文件是一个不费吹灰之力。但是，在某些情况下，您需要逐个添加页面。
+现在的文件只有六页。第一个文档（第一个页面重复）中的页面1,5,7,1，第二个文档中的页面1和15。PdfMerger是一个便利的类，用它来合并文件将不费吹灰之力。但是，在某些情况下，需要逐个添加页面。
 ### 将页面添加到PdfDocument
-图6.8显示了根据我们即将创建的目录（TOC）合并特定页面的结果。该TOC包含链接注释，如果您单击TOC条目，则可以跳转到特定页面。
+图6.8显示了根据我们即将创建的目录（TOC）合并特定页面的结果。该TOC包含链接注释，如果单击TOC条目，则可以跳转到特定页面。
 ![](https://developers.itextpdf.com/sites/default/files/C0608.png "图6.8：基于TOC合并文档")
 <p align="center">图6.8：基于TOC合并文档</p>
 
-[88th_Oscar_Combine_AddTOC](https://developers.itextpdf.com/content/itext-7-jump-start-tutorial/examples/chapter-6#1787-c06e06_88th_oscar_combine_addtoc.java)例子比前两个例子更复杂。让我们一步一步检查。假设我们有一个所有类别的树状图，“Revenant”被提名，其中关键是提名，值是提到提名的文件的页码。
+[88th_Oscar_Combine_AddTOC](https://developers.itextpdf.com/content/itext-7-jump-start-tutorial/examples/chapter-6#1787-c06e06_88th_oscar_combine_addtoc.java)例子比前两个例子更复杂。接下来开始一步一步检查。假设我们有一个所有类别的树状图，“Revenant”被提名，其中关键是提名，值是提到提名的文件的页码。
 ```
 public static final Map<String, Integer> TheRevenantNominations =
     new TreeMap<String, Integer>();
@@ -227,7 +227,7 @@ Document document = new Document(pdfDoc);
 document.add(new Paragraph(new Text("The Revenant nominations list"))
     .setTextAlignment(TextAlignment.CENTER));
 ```
-但是，一旦我们开始循环TreeMap中的条目，我们需要仔细观察。
+但是，一旦开始循环TreeMap中的条目，我们需要仔细观察。
 ```
 PdfDocument firstSourcePdf = new PdfDocument(new PdfReader(SRC1));
 for (Map.Entry<String, Integer> entry : TheRevenantNominations.entrySet()) {
@@ -261,27 +261,28 @@ for (Map.Entry<String, Integer> entry : TheRevenantNominations.entrySet()) {
 }
 firstSourcePdf.close();
 ```
-开始了：
-* 第1行：我们创建一个PdfDocument，其中包含所有关于所有提名的所有信息。
-* 第2行：我们循环列出“亡灵”提名的字母表。第3-4行：我们得到与提名相对应的页面，并且将一个副本添加到PdfDocument中。
-* 第7-8行：我们创建一个包含页码的iText文本元素。我们从该页码中减去1，因为我们文档中的第一页是包含TOC的无编号页面。
-* 第9行：我们将背景颜色设置为Color.WHITE。这将导致一个不透明的白色矩形被绘制与文本的大小相同。我们这样做是为了覆盖原始页码。
-* 第10-11行：我们将这个文本添加到PdfDocument中当前页面上的一个固定位置。固定的位置是：X = 549，Y = 742，文本的宽度是100个用户单位。
-* 第13行：我们创建一个我们将用来命名目的地的密钥。
-* 14-19行：我们创建一个包含目的地信息的PdfArray。我们将引用刚刚添加的页面（第15行），我们将使用X，Y坐标和缩放因子（第16行）来定义目标，我们将X（第17行），Y （第18行）和缩放因子（第19行）。
-* 第20行：我们将指定的目标添加到PdfDocument。
-* 第22行：我们创建一个空的段落。
-* 第23-24行：我们在位置X = 540添加一个制表位，我们定义制表符需要右对齐，制表符之前的空格需要是一个DottedLine。
-* 第25行：我们在段落中加上提名。
-* 第26行：我们介绍一个Tab。
-* 第27行：我们添加页码减1（因为TOC的页面是页面0）。
-* 第28行：我们添加一个操作，当有人点击段落时会触发。
-* 第29行：我们将段落添加到文档中。
-* 第31行：我们关闭源文件。
+开始以下步骤：
+* 第1行：创建一个PdfDocument，其中包含所有关于提名的信息。
+* 第2行：循环列出“亡灵”提名的字母表。
+* 第3-4行：得到与提名相对应的页面，并且将一个副本添加到PdfDocument中。
+* 第7-8行：创建一个包含页码的iText文本元素。我们从该页码中减去1，因为文档中的第一页是包含TOC的无编号页面。
+* 第9行：将背景颜色设置为Color.WHITE。这将导致一个不透明的白色矩形被绘制成与文本的大小相同。我们这样做是为了覆盖原始页码。
+* 第10-11行：将这个文本添加到PdfDocument中当前页面上的一个固定位置。固定的位置是：X = 549，Y = 742，文本的宽度是100个用户单位。
+* 第13行：创建一个将用来命名目的地的密钥。
+* 14-19行：创建一个包含目的地信息的PdfArray。我们将引用刚刚添加的页面（第15行），使用X，Y坐标和缩放因子（第16行）来定义目标，以及X（第17行），Y （第18行）和缩放因子（第19行）。
+* 第20行：将指定的目标添加到PdfDocument。
+* 第22行：创建一个空的段落。
+* 第23-24行：在位置X = 540添加一个制表位，我们定义制表符需要右对齐，制表符之前的空格需要是一个DottedLine。
+* 第25行：在段落中加上提名。
+* 第26行：介绍一个Tab。
+* 第27行：添加页码减1（因为TOC的页面是页面0）。
+* 第28行：添加一个操作，当有人点击段落时会触发。
+* 第29行：将段落添加到文档中。
+* 第31行：关闭源文件。
 
 我们已经介绍了许多新的功能，这些功能的确需要更深入的教程，但是我们看一下这个例子的一个主要原因：显示PdfDocument对象与新页面是通过循环和Document对象添加的，我们在第一页上添加了Paragraph对象。
 
-让我们再次通过一些这些步骤来添加清单。
+让我们再次通过一些步骤来添加清单。
 ```
 //Add the last page
 PdfDocument secondSourcePdf = new PdfDocument(new PdfReader(SRC2));
@@ -308,11 +309,11 @@ secondSourcePdf.close();
 document.close();
 ```
 此代码片段添加了所有提名概览的检查列表。在TOC中增加一行说“奥斯卡®2016电影核对清单”。
->这个例子介绍了一些用于教育目的的新概念。它不应该用于真实世界的应用程序，因为它包含一个主要的缺陷。我们假定TOC只包含一个页面。假设我们在文档对象中添加了更多的行，那么您会看到一个奇怪的现象：不适合第一页的文本会被添加到第二页。这第二页不会是一个新的页面，这将是我们在循环中添加的第一页。换句话说，第一个导入的页面的内容将被覆盖。这是一个可以解决的问题，但它不在这个简短的入门教程的范围之内。
+>这个例子介绍了一些用于教育目的的新概念。它不应该用于真实世界的应用程序，因为包含一个主要的缺陷。我们假定TOC只包含一个页面。假设在文档对象中添加了更多的行，那么会看到一个奇怪的现象：不适合第一页的文本会被添加到第二页。这第二页不会是一个新的页面，这将是我们在循环中添加的第一页。换句话说，第一个导入的页面的内容将被覆盖。这是一个可以解决的问题，但它不在这个简短的入门教程的范围之内。
 
 我们将通过一些合并表单的例子来完成本章。
 ### 合并表单
-合并表格是特殊的。在HTML中，可以在一个HTML文件中包含多个表单。PDF的情况并非如此。在PDF文件中，只能有一种形式。如果您想要合并两个表单并且希望保留表单，则需要使用特殊的方法和特殊的IPdfPageExtraCopier实现。
+合并表格是特殊的。在HTML中，可以在一个HTML文件中包含多个表单。PDF的情况并非如此。在PDF文件中，只能有一种形式。如果你想要合并两个表单并且希望保留表单，则需要使用特殊的方法和特殊的IPdfPageExtraCopier实现。
 
 图6.9显示了两种不同形式的组合，[subscribe.pdf](http://gitlab.itextsupport.com/itext7/samples/raw/develop/publications/jumpstart/src/main/resources/pdf/subscribe.pdf)和[state.pdf](http://gitlab.itextsupport.com/itext7/samples/raw/develop/publications/jumpstart/src/main/resources/pdf/state.pdf):
 ![](https://developers.itextpdf.com/sites/default/files/C0609.png "图6.9：合并两种不同的形式")
@@ -333,14 +334,14 @@ for (PdfDocument sourcePdfDocument : sources) {
 }
 destPdfDocument.close();
 ```
-在这个代码片段中，我们使用copyPageTo（）方法。前两个参数定义源文档的页面的起始/到范围。第三个参数定义目标文档。第四个参数表示我们正在复制表单，两个不同文档中的两种不同表单应该合并成一个表单。PdfPageFormCopier是IPdfPageExtraCopier接口的实现，它确保将两种不同的表单合并成一个表单。
->合并两种形式并不总是微不足道的，因为每个领域的名称必须是唯一的。假设我们将两次合并相同的表单。然后，我们将为每个字段提供两个小部件注释。具有特定名称的字段（例如“名称”）可以使用不同的小部件注释来可视化，但是它只能具有一个值。假设您将在第一页上为字段“名称”创建一个窗口小部件注释，并在第二页上为同一个字段创建窗口小部件注释，然后更改一个页面上窗口小部件注释中显示的值将自动更改在另一页上的小部件注释。
+在这个代码片段中，使用copyPageTo（）方法。前两个参数定义源文档的页面的起始/到范围。第三个参数定义目标文档。第四个参数表示我们正在复制表单，两个不同文档中的两种不同表单应该合并成一个表单。PdfPageFormCopier是IPdfPageExtraCopier接口的实现，它确保将两种不同的表单合并成一个表单。
+>合并两种形式并不总是微不足道的，因为每个领域的名称必须是唯一的。假设我们将两次合并相同的表单。然后，为每个字段提供两个小部件注释。具有特定名称的字段（例如“名称”）可以使用不同的小部件注释来可视化，但是它只能具有一个值。假设您将在第一页上为字段“名称”创建一个窗口小部件注释，并在第二页上为同一个字段创建窗口小部件注释，然后更改一个页面上窗口小部件注释中显示的值将自动更改在另一页上的小部件注释。
 
 在下一个示例中，我们将填写并合并与CSV文件[united_states.csv](http://gitlab.itextsupport.com/itext7/samples/raw/develop/publications/jumpstart/src/main/resources/data/united_states.csv)中的条目相同的表单[state.pdf](http://gitlab.itextsupport.com/itext7/samples/raw/develop/publications/jumpstart/src/main/resources/pdf/state.pdf)。见图6.10。
 ![](https://developers.itextpdf.com/sites/default/files/C0610.png "图6.10：合并相同的表单")
 <p align="center">图6.10：合并相同的表单</p>
 
-如果我们将原始形式的字段名称保持原样，那么将状态“ALABAMA”的值更改为“CALIFORNIA”，也会在第二页上更改名称“ALASKA”，而名称在其他页面的所有其他国家。我们确保在合并表单之前重命名所有字段不会发生这种情况。
+如果我们将原始形式的字段名称保持原样，那么将状态“ALABAMA”的值更改为“CALIFORNIA”，也会在第二页上更改名称“ALASKA”，而其他页面的所有国家的名称。我们确保在合并表单之前重命名所有字段不会发生这种情况。
 
 我们来看看[FillOutAndMergeForms](https://developers.itextpdf.com/content/itext-7-jump-start-tutorial/examples/chapter-6#1789-c06e08_filloutandmergeforms.java)的例子。
 ```
@@ -384,11 +385,11 @@ while ((line = bufferedReader.readLine()) != null) {
 bufferedReader.close();
 pdfDocument.close();
 ```
-我们先看看while循环内的代码。我们正在循环存储在CSV文件中的美国的不同州（第6行）。我们跳过包含列标题信息的第一行（第7-10行）。接下来的几行很有趣。到目前为止，我们一直在写PDF文件到磁盘。在这个例子中，我们使用ByteArrayOutputStream（11-13行）在内存中创建PDF文件。
+我们先看看while循环内的代码。我们正在循环存储在CSV文件中的美国的不同州（第6行）。跳过包含列标题信息的第一行（第7-10行），接下来的几行很有趣。到目前为止，我们一直在写PDF文件到磁盘。在这个例子中，我们使用ByteArrayOutputStream（11-13行）在内存中创建PDF文件。
 
-如前所述，我们从重命名所有的字段开始。我们得到了PdfAcroForm实例（第16行），并使用renameField（）方法将字段（如“name”）重命名为“name_1”，“name_2”等。请注意，为了简洁起见，我们在代码段中跳过了一些行。一旦我们重新命名了所有的字段，我们设置它们的值（23-27行）。
+如前所述，我们从重命名所有的字段开始，得到了PdfAcroForm实例（第16行），并使用renameField（）方法将字段（如“name”）重命名为“name_1”，“name_2”等。请注意，为了简洁起见，我们在代码段中跳过了一些行。一旦重新命名了所有的字段，我们设置它们的值（23-27行）。
 
-当我们关闭sourcePdfDocument（第29行）时，我们在内存中有一个完整的PDF文件。我们使用在内存中使用该文件创建的ByteArrayInputStream创建一个新的sourcePdfDocument（第30-31行）。我们现在可以将新的sourcePdfDocument的页面复制到我们的目标pdfDocument中。
+当我们关闭sourcePdfDocument（第29行）时，在内存中有一个完整的PDF文件。我们在内存中使用该文件创建的ByteArrayInputStream创建一个新的sourcePdfDocument（第30-31行）。我们现在可以将新的sourcePdfDocument的页面复制到我们的目标pdfDocument中。
 
 这是一个相当人为的例子，但是这是一个很好的例子来解释合并表单时常见的一些陷阱：
 * 没有PdfPageFormCopier，表单将不会正确合并。
@@ -397,7 +398,7 @@ pdfDocument.close();
 更常见的用例是在内存中多次填写和拼合相同的表单，同时将所有生成的文档合并到一个PDF中。
 
 ### 合并扁平形式
-图6.11显示了两个PDF文件，这些文件是同样程序的结果：我们在内存中填写了一个与美国州相同的表格。我们把这些填好的表格弄平了，我们把它们合并成一个单一的文件。
+图6.11显示了两个PDF文件，这些文件是同样程序的结果：我们在内存中填写了一个与美国州相同的表格。把这些填好的表格弄平了，将它们合并成一个单一的文件。
 ![](https://developers.itextpdf.com/sites/default/files/C0611.png "图6.11：填充，拼合和合并表格")
 <p align="center">图6.11：填充，拼合和合并表格</p>
 
@@ -446,17 +447,17 @@ bufferedReader.close();
 destPdfDocument.close();
 destPdfDocumentSmartMode.close();
 ```
-在这段代码中，我们同时创建了两个文档：
+在这段代码中，同时创建了两个文档：
 * destPdfDocument实例（第1-2行）的创建方式与我们一直创建PdfDocument实例的方式相同。
 * destPdfDocumentSmartMode实例（第3-4行）也是以这种方式创建的，但是我们已经打开了智能模式。
 
-我们像之前一样循环CSV文件的行（第8行），但是由于我们要将表单变平，我们不必再重新命名这些字段。无论如何，由于扁平化过程，田地将会丢失。我们在内存中创建一个新的PDF文档（第12-15行），并填写字段（第17-23行）。我们将字段弄平（第25行）并关闭内存中创建的文档（第26行）。我们使用在内存中创建的文件来创建一个新的源文件。我们将这个源文件的所有页面添加到两个PdfDocument实例中，一个在正常模式下工作，另一个在智能模式下工作。我们不再需要使用PdfPageFormCopier实例，因为表单已经变平了; 他们不再是形式。
+我们像之前一样循环CSV文件的行（第8行），但是由于我们要将表单变平，我们不必再重新命名这些字段。无论如何，由于扁平化过程，田地将会丢失。我们在内存中创建一个新的PDF文档（第12-15行），并填写字段（第17-23行）。我们将字段弄平（第25行）并关闭内存中创建的文档（第26行），使用在内存中创建的文件来创建一个新的源文件。我们将这个源文件的所有页面添加到两个PdfDocument实例中，一个在正常模式下工作，另一个在智能模式下工作。我们不再需要使用PdfPageFormCopier实例，因为表单已经变平了; 他们不再是形式。
 
 这些正常和智能模式有什么区别？
 * 当我们将填写好的表单页面复制到在正常模式下工作的PdfDocument时，PdfDocument将处理每个文档，就好像它与其他正在添加的文档完全无关。在这种情况下，生成的文档会变得臃肿，因为文档是相关的：它们都共享相同的模板。该模板被添加到PDF文档中的次数与美国的州数量相同。在这种情况下，结果是一个大约12 MB的文件。
 * 当我们将填写的表单页面复制到以智能模式工作的PdfDocument时，PdfDocument将花费时间比较每个文档的资源。如果两个单独的文档共享相同的资源（例如模板），则该资源仅被复制到新文件一次。在这种情况下，结果可能被限制为365 KB。在PDF查看器或打印时，12兆字节和365千字节文件看起来完全一样，但不言而喻，365千字节文件优于12兆字节文件。
 
 ### 总结
-在本章中，我们一直在扩展，平铺，用一个不同的文件作为结果N-upping一个文件。我们还以许多不同的方式组装文件。我们发现合并交互式表单时存在相当多的缺陷。关于重复使用现有PDF文档的内容还有很多要说的。
+在本章中，我们一直在扩展，平铺，用一个不同的文件作为结果N-upping一个文件。我们还以许多不同的方式组装文件，发现合并交互式表单时存在相当多的缺陷。关于重复使用现有PDF文档的内容还有很多要说的。
 
-在下一章中，我们将讨论符合PDF / UA和PDF / A等特殊PDF标准的PDF文档。我们会发现合并PDF / A文档也需要特别注意。
+在下一章中，我们将讨论符合PDF / UA和PDF / A等特殊PDF标准的PDF文档。将会发现合并PDF / A文档也需要特别注意。
