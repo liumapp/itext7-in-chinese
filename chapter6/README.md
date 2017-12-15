@@ -21,6 +21,7 @@ ready to translate : [https://developers.itextpdf.com/content/itext-7-jump-start
 现在我们要创建一个三页PDF文件。在第一页中，原始页面缩小到11.69 x 8.26英寸，如图6.2所示。在页2上，原始页面大小被保留。在第3页，原始页面被放大到23.39 x 16.53 in，如图6.3所示。
 ![](https://developers.itextpdf.com/sites/default/files/C06F02_1.png "图6.2：金门大桥，缩小到11.69 x 8.26英寸")
 <p align="center">图6.2：金门大桥，缩小到11.69 x 8.26英寸</p>
+
 ![](https://developers.itextpdf.com/sites/default/files/C06F03_1.png "图6.3：金门大桥，按比例缩小至23.39 x 16.53英寸")
 <p align="center">图6.3：金门大桥，按比例缩小至23.39 x 16.53英寸</p>
 
