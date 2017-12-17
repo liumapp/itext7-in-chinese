@@ -2,21 +2,13 @@ ready to translate : [https://developers.itextpdf.com/content/itext-7-jump-start
 
 ## 第7章：创建PDF/UA和PDF/A文档
 
-在第1章到第4章中，我们使用iText 7创建了PDF文档。在第5章和第6章中，我们操纵和重用了现有的PDF文档。我们在这些章节中处理的所有PDF都是符合ISO 32000（这是PDF的核心标准）的PDF文档。 ISO 32000不是PDF的唯一ISO标准，有许多不同的子标准是由于特定的原因而创建的。在本章中，我们将重点介绍两个：
+在第1章到第4章中，我们使用iText 7创建了PDF文档。在第5章和第6章中，我们操纵和重用了现有的PDF文档。我们在这些章节中处理的所有PDF都是符合ISO 32000（这是PDF的核心标准）的PDF文档。 ISO 32000不是PDF的唯一ISO标准，有许多不同的子标准是出于特定的原因而创建的。在本章中，我们将重点介绍两个标准：
 
-* ISO 14289被称为PDF / UA。 UA代表通用可访问性。符合PDF / UA标准的PDF文件可供任何人使用，包括失明或视障人士。
+* ISO 14289也被称为PDF / UA。 UA代表通用可访问性。符合PDF / UA标准的PDF文件可供任何人使用，包括失明或视障人士。
 
-* ISO 19005被称为PDF / A。 A代表归档。这个标准的目标是数字文件的长期保存。
+* ISO 19005也被称为PDF / A。 A代表归档。这个标准被创建的目标是实现数字文件的长期保存。
 
-在本章中，我们将通过创建一系列PDF / A和PDF / UA文件来了解有关PDF / A和PDF / UA的更多信息。
-
-In chapter 1 to 4, we've created PDF documents using iText 7. In chapters 5 and 6, we've manipulated and reused existing PDF documents. All the PDFs we dealt with in those chapters were PDF documents that complied to ISO 32000, which is the core standard for PDF. ISO 32000 isn't the only ISO standard for PDF, there are many different sub-standards that were created for specific reasons. In this chapter, we'll highlight two:
-
-* ISO 14289 is better known as PDF/UA. UA stands for Universal Accessibility. PDFs that comply with the PDF/UA standard can be consumed by anyone, including people who are blind or visually impaired.
-
-* ISO 19005 is better known as PDF/A. A stands for Archiving. The goal of this standard is the long-term preservation of digital documents.
-
-In this chapter, we'll learn more about PDF/A and PDF/UA by creating a series of PDF/A and PDF/UA files.
+在本章中，我们将通过创建一系列PDF / A和PDF / UA文件来了解它们两者的更多信息。
 
 ### 创建可访问的PDF文档
 
