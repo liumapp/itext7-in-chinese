@@ -12,9 +12,7 @@ ready to translate : [https://developers.itextpdf.com/content/itext-7-jump-start
 
 ### 创建可访问的PDF文档
 
-在我们开始PDF / UA的例子之前，让我们仔细看看我们想要解决的问题。在第1章中，我们创建了包含图像的文档。在“快速的棕色狐狸跳过懒惰的狗”的句子中，我们用代表狐狸和狗的图像替换了“狐狸”和“狗”这两个字。当这个文件被大声朗读时，机器不知道第一个图像代表一只狐狸，而第二个图像代表一只狗，因此该文件将被读作“快速褐色跳过懒惰”。
-
-Before we start with a PDF/UA example, let's take a closer look at the problem we want to solve. In chapter 1, we created a document that included images. In the sentence "Quick brown fox jumps over the lazy dog", we replaced the words "fox" and "dog" by images representing a fox and a dog. When this file is read out loud, a machine doesn't know that the first image represents a fox and that the second image represents a dog, hence the file will be read as "Quick brown jumps over the lazy."
+在我们开始PDF / UA的例子之前，让我们仔细看看接下来想要解决的问题。在第1章中，我们创建了包含图像的文档。在“敏捷的棕色狐狸跳过懒惰的狗”的例子中，我们用代表狐狸和狗的图像替换了“狐狸”和“狗”这两个字。当这个文件被系统读取时，电脑并不知道第一个图像代表一只狐狸，而第二个图像代表一只狗，因此该文件将被读作“敏捷的棕色跳过懒惰”。
 
 > 在普通的PDF中，内容被绘制到画布上。我们可以使用List和Table等高级对象，但一旦创建了PDF，就没有结构了。列表是一系列行，列表项中的文本片段不知道它是列表的一部分。表格只是一堆线条和文本添加在页面上的绝对位置。表中的文本片段不知道它属于特定列和特定行中的单元格。
 
